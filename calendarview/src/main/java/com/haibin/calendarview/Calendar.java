@@ -121,6 +121,7 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
      */
     private Calendar lunarCalendar;
 
+    List<Object> mAdditionalData = new ArrayList<>();
 
     public int getYear() {
         return year;
@@ -234,6 +235,11 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
             schemes = new ArrayList<>();
         }
         schemes.add(new Scheme(schemeColor, scheme, other));
+    }
+
+    public void addScheme(int type, int schemeColor, String scheme, List<Object> data) {
+        addScheme(type, schemeColor, scheme);
+        mAdditionalData.addAll(data);
     }
 
     public boolean isWeekend() {
