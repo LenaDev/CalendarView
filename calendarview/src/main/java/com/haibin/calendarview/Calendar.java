@@ -121,7 +121,7 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
      */
     private Calendar lunarCalendar;
 
-    List<Object> mAdditionalData = new ArrayList<>();
+    ArrayList<Object> mAdditionalData = new ArrayList<>();
 
     public int getYear() {
         return year;
@@ -238,11 +238,11 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
     }
 
 
-    public void setAdditionalData(final List<Object> additionalData) {
-        mAdditionalData = additionalData;
+    public void setAdditionalData(final ArrayList<Object> additionalData) {
+        mAdditionalData = new ArrayList<>(additionalData);
     }
 
-    public List<Object> getAdditionalData() {
+    public ArrayList<Object> getAdditionalData() {
         return mAdditionalData;
     }
 
