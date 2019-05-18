@@ -237,9 +237,13 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
         schemes.add(new Scheme(schemeColor, scheme, other));
     }
 
-    public void addScheme(int type, int schemeColor, String scheme, List<Object> data) {
-        addScheme(type, schemeColor, scheme);
-        mAdditionalData.addAll(data);
+
+    public void setAdditionalData(final List<Object> additionalData) {
+        mAdditionalData = additionalData;
+    }
+
+    public List<Object> getAdditionalData() {
+        return mAdditionalData;
     }
 
     public boolean isWeekend() {
