@@ -121,7 +121,10 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
      */
     private Calendar lunarCalendar;
 
-    ArrayList<Object> mAdditionalData = new ArrayList<>();
+    ArrayList<Object> mAdditionalData = new ArrayList<Object>();
+
+    public Calendar() {
+    }
 
     public int getYear() {
         return year;
@@ -406,6 +409,7 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
                 defaultScheme : calendar.getScheme());
         setSchemeColor(calendar.getSchemeColor());
         setSchemes(calendar.getSchemes());
+        mAdditionalData = calendar.getAdditionalData();
     }
 
     final void clearScheme() {

@@ -169,6 +169,7 @@ final class CalendarUtil {
         preCalendar.setYear(date.get(java.util.Calendar.YEAR));
         preCalendar.setMonth(date.get(java.util.Calendar.MONTH) + 1);
         preCalendar.setDay(date.get(java.util.Calendar.DAY_OF_MONTH));
+//        preCalendar.setAdditionalData(calendar.getAdditionalData());
 
         return preCalendar;
     }
@@ -186,6 +187,7 @@ final class CalendarUtil {
         nextCalendar.setYear(date.get(java.util.Calendar.YEAR));
         nextCalendar.setMonth(date.get(java.util.Calendar.MONTH) + 1);
         nextCalendar.setDay(date.get(java.util.Calendar.DAY_OF_MONTH));
+//        nextCalendar.setAdditionalData(calendar.getAdditionalData());
 
         return nextCalendar;
     }
@@ -591,6 +593,8 @@ final class CalendarUtil {
             if (calendarDate.equals(currentDate)) {
                 calendarDate.setCurrentDay(true);
             }
+            calendarDate.setAdditionalData(currentDate.getAdditionalData());
+
             LunarCalendar.setupLunarCalendar(calendarDate);
             mItems.add(calendarDate);
         }
@@ -621,6 +625,7 @@ final class CalendarUtil {
         startCalendar.setYear(minCalendar.get(java.util.Calendar.YEAR));
         startCalendar.setMonth(minCalendar.get(java.util.Calendar.MONTH) + 1);
         startCalendar.setDay(minCalendar.get(java.util.Calendar.DAY_OF_MONTH));
+        startCalendar.setAdditionalData(calendar.getAdditionalData());
         return initCalendarForWeekView(startCalendar, mDelegate, mDelegate.getWeekStart());
     }
 
@@ -646,6 +651,7 @@ final class CalendarUtil {
         selectCalendar.setYear(date.get(java.util.Calendar.YEAR));
         selectCalendar.setMonth(date.get(java.util.Calendar.MONTH) + 1);
         selectCalendar.setDay(date.get(java.util.Calendar.DAY_OF_MONTH));
+        selectCalendar.setAdditionalData(calendar.getAdditionalData());
         if (selectCalendar.equals(mDelegate.getCurrentDay())) {
             selectCalendar.setCurrentDay(true);
         }
@@ -660,6 +666,7 @@ final class CalendarUtil {
             calendarDate.setYear(date.get(java.util.Calendar.YEAR));
             calendarDate.setMonth(date.get(java.util.Calendar.MONTH) + 1);
             calendarDate.setDay(date.get(java.util.Calendar.DAY_OF_MONTH));
+            calendarDate.setAdditionalData(calendar.getAdditionalData());
             if (calendarDate.equals(mDelegate.getCurrentDay())) {
                 calendarDate.setCurrentDay(true);
             }
@@ -730,6 +737,7 @@ final class CalendarUtil {
         calendar.setYear((position + delegate.getMinYearMonth() - 1) / 12 + delegate.getMinYear());
         calendar.setMonth((position + delegate.getMinYearMonth() - 1) % 12 + 1);
         calendar.setDay(1);
+//        calendar.setAdditionalData(delegate.mSelectedCalendar.getAdditionalData());
         if (!isCalendarInRange(calendar, delegate)) {
             if (isMinRangeEdge(calendar, delegate)) {
                 calendar = delegate.getMinRangeCalendar();

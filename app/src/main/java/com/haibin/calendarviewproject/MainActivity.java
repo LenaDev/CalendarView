@@ -30,6 +30,7 @@ import com.haibin.calendarviewproject.simple.SimpleActivity;
 import com.haibin.calendarviewproject.single.SingleActivity;
 import com.haibin.calendarviewproject.solay.SolarActivity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -357,7 +358,14 @@ public class MainActivity extends BaseActivity implements
         calendar.setMonth(month);
         calendar.setDay(day);
         calendar.setSchemeColor(color);//如果单独标记颜色、则会使用这个颜色
+
+        ArrayList<Object> calendars = new ArrayList<>();
+        calendars.add(calendar);
+        calendar.setAdditionalData(calendars);
+
         calendar.setScheme(text);
+
+
         return calendar;
     }
 
