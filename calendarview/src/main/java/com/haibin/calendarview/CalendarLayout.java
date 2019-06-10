@@ -164,6 +164,18 @@ public class CalendarLayout extends LinearLayout {
 
     private CalendarViewDelegate mDelegate;
 
+    public static interface OnExpandCollapseListener {
+        void onCollapsed();
+        void onExpanded();
+    }
+
+    private OnExpandCollapseListener mOnExpandCollapseListener;
+
+
+    public void setOnExpandCollapseListener(final OnExpandCollapseListener onExpandCollapseListener) {
+        mOnExpandCollapseListener = onExpandCollapseListener;
+    }
+
     public CalendarLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOrientation(LinearLayout.VERTICAL);
@@ -714,6 +726,8 @@ public class CalendarLayout extends LinearLayout {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
+                if (mOnExpandCollapseListener != null)
+                    mOnExpandCollapseListener.onExpanded();
                 isAnimating = false;
                 if (mGestureMode == GESTURE_MODE_DISABLED) {
                     requestLayout();
@@ -764,6 +778,8 @@ public class CalendarLayout extends LinearLayout {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
+                if (mOnExpandCollapseListener != null)
+                    mOnExpandCollapseListener.onCollapsed();
                 isAnimating = false;
                 showWeek();
                 isWeekView = true;
