@@ -164,9 +164,14 @@ public class CalendarLayout extends LinearLayout {
 
     private CalendarViewDelegate mDelegate;
 
-    public static interface OnExpandCollapseListener {
+    public interface OnExpandCollapseListener {
+        void onStartCollapse();
+        void onCollapseUpdate();
         void onCollapsed();
+
+        void onStartExpand();
         void onExpanded();
+        void onExpandUpdate();
     }
 
     private OnExpandCollapseListener mOnExpandCollapseListener;
@@ -720,9 +725,18 @@ public class CalendarLayout extends LinearLayout {
                 float percent = currentValue * 1.0f / mContentViewTranslateY;
                 mMonthView.setTranslationY(mViewPagerTranslateY * percent);
                 isAnimating = true;
+                if (mOnExpandCollapseListener != null)
+                    mOnExpandCollapseListener.onExpandUpdate();
             }
         });
         objectAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(final Animator animation) {
+                super.onAnimationStart(animation);
+                if (mOnExpandCollapseListener != null)
+                    mOnExpandCollapseListener.onStartExpand();
+            }
+
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
@@ -772,9 +786,19 @@ public class CalendarLayout extends LinearLayout {
                 float percent = currentValue * 1.0f / mContentViewTranslateY;
                 mMonthView.setTranslationY(mViewPagerTranslateY * percent);
                 isAnimating = true;
+                if (mOnExpandCollapseListener != null)
+                    mOnExpandCollapseListener.onCollapseUpdate();
             }
         });
         objectAnimator.addListener(new AnimatorListenerAdapter() {
+
+            @Override
+            public void onAnimationStart(final Animator animation) {
+                super.onAnimationStart(animation);
+                if (mOnExpandCollapseListener != null)
+                    mOnExpandCollapseListener.onStartCollapse();
+            }
+
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
