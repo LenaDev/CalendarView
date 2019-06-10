@@ -334,33 +334,36 @@ public class CalendarLayout extends LinearLayout {
                 float dy = y - mLastY;
 
                 //向上滑动，并且contentView平移到最大距离，显示周视图
+                //Swipe up and the contentView pans to the maximum distance, showing the week view
                 if (dy < 0 && mContentView.getTranslationY() == -mContentViewTranslateY) {
                     mLastY = y;
-                    event.setAction(MotionEvent.ACTION_DOWN);
-                    dispatchTouchEvent(event);
-                    mWeekPager.setVisibility(VISIBLE);
-                    mMonthView.setVisibility(INVISIBLE);
-                    if (!isWeekView && mDelegate.mViewChangeListener != null) {
-                        mDelegate.mViewChangeListener.onViewChange(false);
-                    }
-                    isWeekView = true;
+//                    event.setAction(MotionEvent.ACTION_DOWN);
+//                    dispatchTouchEvent(event);
+//                    mWeekPager.setVisibility(VISIBLE);
+//                    mMonthView.setVisibility(INVISIBLE);
+//                    if (!isWeekView && mDelegate.mViewChangeListener != null) {
+//                        mDelegate.mViewChangeListener.onViewChange(false);
+//                    }
+//                    isWeekView = true;
                     //shrink(0);
                     return false;
                 }
                 hideWeek(false);
 
                 //向下滑动，并且contentView已经完全平移到底部
+                //Swipe down and the contentView has fully panned to the bottom
                 if (dy > 0 && mContentView.getTranslationY() + dy >= 0) {
-                    mContentView.setTranslationY(0);
-                    translationViewPager();
+//                    mContentView.setTranslationY(0);
+//                    translationViewPager();
                     mLastY = y;
                     return super.onTouchEvent(event);
                 }
 
                 //向上滑动，并且contentView已经平移到最大距离，则contentView平移到最大的距离
+                //Slide up and the contentView has been panned to the maximum distance, then the contentView pans to the maximum distance
                 if (dy < 0 && mContentView.getTranslationY() + dy <= -mContentViewTranslateY) {
-                    mContentView.setTranslationY(-mContentViewTranslateY);
-                    translationViewPager();
+//                    mContentView.setTranslationY(-mContentViewTranslateY);
+//                    translationViewPager();
                     mLastY = y;
                     return super.onTouchEvent(event);
                 }
@@ -384,7 +387,7 @@ public class CalendarLayout extends LinearLayout {
                 float mYVelocity = velocityTracker.getYVelocity();
                 if (mContentView.getTranslationY() == 0
                         || mContentView.getTranslationY() == mContentViewTranslateY) {
-                    expand();
+//                    expand();
                     break;
                 }
                 if (Math.abs(mYVelocity) >= 800) {
@@ -396,7 +399,7 @@ public class CalendarLayout extends LinearLayout {
                     return super.onTouchEvent(event);
                 }
                 if (event.getY() - downY > 0) {
-                    expand();
+//                    expand();
                 } else {
                     shrink();
                 }
