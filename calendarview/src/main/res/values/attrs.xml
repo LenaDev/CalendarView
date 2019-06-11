@@ -108,6 +108,7 @@
             <enum name="shrink" value="1" />
         </attr>
 
+        <attr name="anim_duration_default" format="integer"/>
 
         <!-- 手势模式 -->
         <attr name="gesture_mode">

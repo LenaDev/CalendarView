@@ -47,6 +47,7 @@ import android.widget.LinearLayout;
 @SuppressWarnings("unused")
 public class CalendarLayout extends LinearLayout {
 
+    private final int mAnimDurationDefault;
     /**
      * 多点触控支持
      */
@@ -186,6 +187,7 @@ public class CalendarLayout extends LinearLayout {
         super(context, attrs);
         setOrientation(LinearLayout.VERTICAL);
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CalendarLayout);
+        mAnimDurationDefault = array.getInt(R.styleable.CalendarLayout_anim_duration_default, 240);
         mContentViewId = array.getResourceId(R.styleable.CalendarLayout_calendar_content_view_id, 0);
         mDefaultStatus = array.getInt(R.styleable.CalendarLayout_default_status, STATUS_EXPAND);
         mCalendarShowMode = array.getInt(R.styleable.CalendarLayout_calendar_show_mode, CALENDAR_SHOW_MODE_BOTH_MONTH_WEEK_VIEW);
@@ -695,7 +697,7 @@ public class CalendarLayout extends LinearLayout {
 
 
     public boolean expand() {
-        return expand(240);
+        return expand(mAnimDurationDefault);
     }
 
 
@@ -762,7 +764,7 @@ public class CalendarLayout extends LinearLayout {
 
 
     public boolean shrink() {
-        return shrink(240);
+        return shrink(mAnimDurationDefault);
     }
 
     /**

@@ -129,8 +129,6 @@
         app:calendar_show_mode="both_month_week_view"
         app:default_status="shrink">
 
-
-
         <com.haibin.calendarview.CalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
