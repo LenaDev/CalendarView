@@ -30,6 +30,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -166,12 +167,12 @@ public class CalendarLayout extends LinearLayout {
 
     public interface OnExpandCollapseListener {
         void onStartCollapse();
-        void onCollapseUpdate();
+        void onCollapseUpdate(float percent);
         void onCollapsed();
 
         void onStartExpand();
         void onExpanded();
-        void onExpandUpdate();
+        void onExpandUpdate(float percent);
     }
 
     private OnExpandCollapseListener mOnExpandCollapseListener;
@@ -725,8 +726,9 @@ public class CalendarLayout extends LinearLayout {
                 float percent = currentValue * 1.0f / mContentViewTranslateY;
                 mMonthView.setTranslationY(mViewPagerTranslateY * percent);
                 isAnimating = true;
+
                 if (mOnExpandCollapseListener != null)
-                    mOnExpandCollapseListener.onExpandUpdate();
+                    mOnExpandCollapseListener.onExpandUpdate(percent*(-100));
             }
         });
         objectAnimator.addListener(new AnimatorListenerAdapter() {
@@ -787,7 +789,7 @@ public class CalendarLayout extends LinearLayout {
                 mMonthView.setTranslationY(mViewPagerTranslateY * percent);
                 isAnimating = true;
                 if (mOnExpandCollapseListener != null)
-                    mOnExpandCollapseListener.onCollapseUpdate();
+                    mOnExpandCollapseListener.onCollapseUpdate(percent*(-100));
             }
         });
         objectAnimator.addListener(new AnimatorListenerAdapter() {
